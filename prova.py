@@ -1,25 +1,16 @@
 import requests
-from bs4 import BeautifulSoup as bs
-import csv
 
-URL = 'https://www.geeksforgeeks.org/page/'
+url = "https://finance.yahoo.com/quote/%5EGSPC?p=%5EGSPC"
 
-soup = bs(req.text, 'html.parser')
+response = requests.get(url)
 
-titles = soup.find_all('div', attrs={'class', 'head'})
-titles_list = []
 
-count = 1
-for title in titles:
-	d = {}
-	d['Title Number'] = f'Title {count}'
-	d['Title Name'] = title.text
-	count += 1
-	titles_list.append(d)
+prop = "Previous Close"
+"""print(response)"""
+"""print(response.status_code==200)"""
+t = response.text
 
-filename = 'titles.csv'
-with open(filename, 'w', newline='') as f:
-	w = csv.DictWriter(f,['Title Number','Title Name'])
-	w.writeheader()
-	
-	w.writerows(titles_list)
+
+
+ind = t.index("Previous Close")
+print(t[ind:ind+200])
