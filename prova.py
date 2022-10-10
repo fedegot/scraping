@@ -13,4 +13,7 @@ t = response.text
 
 
 ind = t.index("Previous Close")
-print(t[ind:ind+200])
+mm = t[ind:].split("</td>")[1]
+val = mm.split("</td>")[-1].split()
+val2 = val[4]
+print(val2[-8:])
